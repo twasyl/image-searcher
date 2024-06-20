@@ -33,4 +33,4 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: ${{ github.repository }}
-          readme-filepath: README.md
+          short-description: ${{ github.event.repository.description }}
