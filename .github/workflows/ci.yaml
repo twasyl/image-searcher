@@ -31,7 +31,7 @@ jobs:
       -
         name: Test docker image
         run: |
-          docker run --rm ${{ env.TEST_TAG }} -v $(pwd)/tests/resources:/work > tmp.txt
+          docker run --rm -v $(pwd)/tests/resources:/work ${{ github.repository }}:${{ github.sha }} > tmp.txt
           grep tmp.txt -e 'master'
           exit $?
       -
