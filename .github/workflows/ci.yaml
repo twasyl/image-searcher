@@ -1,12 +1,14 @@
 name: ci
 
 on:
+  # release:
+  #   types: [published]
   push:
     branches:
       - 'docker-build'
 
 jobs:
-  docker-build:
+  docker-build-publish:
     runs-on: ubuntu-latest
     steps:
       - 
@@ -22,10 +24,25 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v6
         with:
-          push: true
+          load: true
           tags: |
             ${{ github.repository }}:latest
             ${{ github.repository }}:${{ github.sha }}
+      -
+        name: Test docker image
+        run: |
+          docker run --rm ${{ env.TEST_TAG }} -v $(pwd)/tests/resources:/work > tmp.txt
+          grep tmp.txt -e 'master'
+          exit $?
+      -
+        name: Build and push
+        uses: docker/build-push-action@v6
+        if: ${{ success() }}
+        with:
+          push: true
+          tags: |
+            ${{ github.repository }}:latest
+            ${{ github.repository }}:${{ github.sha }} 
   repo-update:
     runs-on: ubuntu-latest
     needs: [docker-build]
