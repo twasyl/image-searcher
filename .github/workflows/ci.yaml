@@ -26,3 +26,11 @@ jobs:
           tags: |
             ${{ github.repository }}:latest
             ${{ github.repository }}:${{ github.sha }}
+      - 
+        name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ github.repository }}
+          readme-filepath: README.md

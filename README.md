@@ -1,15 +1,16 @@
-This project aims to use an OCR engine to search for words in software screenshots.
+This project aims to use an OCR engine to search for words in software screenshots. 
 
-# Requirements
+You can find pre-built Docker images on [Docker Hub](https://hub.docker.com/r/twasyl/image-searcher).
 
-You must have installed Docker on your system and must have cloned this repository.
+Source code can be found on [GitHub](https://github.com/twasyl/image-searcher).
 
 # Building
 
+You must have installed Docker on your system and must have cloned this repository.
 In order to build the Docker image image:
 
 1. Using a command line, go in the folder containing this repository
-2. Execute `docker build -t image-searcher:latest .`
+2. Execute `docker build -t twasyl/image-searcher:latest .`
 
 # Using
 
@@ -22,7 +23,7 @@ Run the previously built image using the following command:
 ```
 $ docker run --rm -it \
          -v /Users/me/project:/work \
-         image-searcher:latest
+         twasyl/image-searcher:latest
 ```
 
 ## Customize the offensive words
@@ -33,5 +34,5 @@ Words are stored in an environment variable named `SEARCHED_WORDS` (default valu
 $ docker run --rm -it \
          -v /Users/me/project:/work \
          -e SEARCHED_WORDS="word1 word2" \
-         image-searcher:latest
+         twasyl/image-searcher:latest
 ```
