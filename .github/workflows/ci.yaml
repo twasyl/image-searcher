@@ -1,11 +1,11 @@
 name: ci
 
 on:
-  # release:
-  #   types: [published]
   push:
     branches:
-      - 'docker-build'
+      - docker-build
+  release:
+    types: [published]
 
 jobs:
   docker-build-publish:
@@ -42,7 +42,8 @@ jobs:
           push: true
           tags: |
             ${{ github.repository }}:latest
-            ${{ github.repository }}:${{ github.sha }} 
+            ${{ github.repository }}:${{ github.sha }}
+            ${{ github.repository }}:${{ github.ref_name }}
       - 
         name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
