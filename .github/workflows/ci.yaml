@@ -31,6 +31,7 @@ jobs:
       -
         name: Test docker image
         run: |
+          pwd
           ls -l
           ./tests/test-docker-image.sh ${{ github.repository }}:${{ github.sha }}
       -
