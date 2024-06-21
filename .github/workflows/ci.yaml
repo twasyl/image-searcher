@@ -32,7 +32,7 @@ jobs:
         name: Test docker image
         run: |
           docker run --rm -v ./tests/resources:/work ${{ github.repository }}:${{ github.sha }} > tmp.txt
-          # grep ./tmp.txt -e 'master'
+          grep ./tmp.txt -e 'master'
           # echo $?
       -
         name: Build and push
