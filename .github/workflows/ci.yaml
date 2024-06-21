@@ -2,8 +2,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - docker-build
   release:
     types: [published]
 
@@ -37,7 +35,7 @@ jobs:
       -
         name: Build and push
         uses: docker/build-push-action@v6
-        if: ${{ success() }}
+        if: ${{ success() && github.event_name == 'release' }}
         with:
           push: true
           tags: |
@@ -47,7 +45,7 @@ jobs:
       - 
         name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
-        if: ${{ success() }}
+        if: ${{ success() && github.event_name == 'release' }}
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
