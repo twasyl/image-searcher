@@ -30,8 +30,9 @@ jobs:
             ${{ github.repository }}:${{ github.sha }}
       -
         name: Test docker image
+        working-directory: ./tests
         run: |
-          ./tests/test-docker-image.sh
+          ./test-docker-image.sh
       -
         name: Build and push
         uses: docker/build-push-action@v6
